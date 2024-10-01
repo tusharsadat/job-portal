@@ -71,7 +71,6 @@
                                 <li class="d-lg-none"><a href="post-job.html"><span class="mr-2">+</span> Post a
                                         Job</a></li>
                                 <li class="d-lg-none"><a href="login.html">Log In</a></li>
-
                             </ul>
                         </nav>
 
@@ -91,6 +90,28 @@
                                             class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span
                                                 class="mr-2 icon-lock_outline"></span>Log In</a>
                                     @endif
+                                @else
+                                    <a style="padding: 8px" id="navbarDropdown"
+                                        class="btn btn-primary border-width-2 d-none d-lg-inline-block nav-link dropdown-toggle"
+                                        href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false" v-pre>
+                                        <span class="mr-2 icon-lock_outline"></span>
+                                        {{ Auth::user()->name }}
+                                    </a>
+
+                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                            {{ __('Logout') }}
+                                        </a>
+
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                            class="d-none">
+                                            @csrf
+                                        </form>
+                                    </div>
+
                                 @endguest
                             </div>
                             <a href="#"
@@ -101,8 +122,7 @@
                     </div>
                 </div>
             </header>
-            {{-- <section class="home-section section-hero overlay bg-image"
-                style="background-image: url({{ asset('assets/images/hero_1.jpg') }});" id="home-section"> --}}
+
 
 
 
