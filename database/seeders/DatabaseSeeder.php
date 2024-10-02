@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Category;
 use App\Models\Job;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -30,6 +31,11 @@ class DatabaseSeeder extends Seeder
             'email_verified_at' => time()
         ]);
 
-        Job::factory()->count(50)->create();
+        //Job::factory()->count(50)->create();
+
+        // Create 10 categories, and for each category, create 5 jobs
+        Category::factory(10) // Create 10 categories
+            ->hasJobs(5) // Each category will have 5 jobs
+            ->create();
     }
 }

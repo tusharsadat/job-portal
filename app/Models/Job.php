@@ -25,4 +25,10 @@ class Job extends Model
         'other_benifits',
         'image',
     ];
+
+    // A job belongs to one category
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

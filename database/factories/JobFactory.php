@@ -2,6 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\Job;
+use App\Models\Category;
+
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -9,6 +12,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class JobFactory extends Factory
 {
+    protected $model = Job::class;
     /**
      * Define the model's default state.
      *
@@ -31,6 +35,7 @@ class JobFactory extends Factory
             'education_experience' => fake()->realText(),
             'other_benifits' => fake()->realText(),
             'image' => fake()->imageUrl(),
+            'category_id' => Category::factory(),
 
         ];
     }
