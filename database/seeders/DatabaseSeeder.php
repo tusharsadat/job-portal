@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Job;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -18,5 +21,15 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        User::factory()->create([
+            'id' => 3,
+            'name' => 'sadat',
+            'email' => 'sadat@example.com',
+            'password' => bcrypt('123.321A'),
+            'email_verified_at' => time()
+        ]);
+
+        Job::factory()->count(50)->create();
     }
 }

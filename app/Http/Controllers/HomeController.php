@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Job;
+
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +25,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $latestJobs = Job::latest()->take(5)->get();
+        $jobCount = Job::count();
+
+        return view('/home', compact('jobCount', 'latestJobs'));
     }
 }
