@@ -23,3 +23,5 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/jobs/singleJob/{id}', [JobController::class, 'index'])->name('single-job');
+
+Route::post('/jobs/saveJob', [JobController::class, 'singleJobSave'])->name('save.job');

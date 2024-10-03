@@ -18,8 +18,22 @@
         </div>
     </section>
 
+    <div style="margin-top: 5px">
+        @if (Session::get('success'))
+            <div class="alert alert-success">
+                {{ Session::get('success') }}
+            </div>
+        @endif
 
-    <section class="site-section">
+        @if (Session::get('fail'))
+            <div class="alert alert-danger">
+                {{ Session::get('fail') }}
+            </div>
+        @endif
+    </div>
+
+
+    <section style="padding-bottom:0px;" class="site-section">
         <div class="container">
             <div class="row align-items-center mb-5">
                 <div class="col-lg-8 mb-4 mb-lg-0">
@@ -70,7 +84,23 @@
 
                         <div class="row mb-5">
                             <div class="col-6">
-                                <button class="btn btn-block btn-light btn-md"><i class="icon-heart"></i>Save Job</button>
+                                <form action="{{ route('save.job') }}" method="post">
+                                    @csrf
+                                    <input name="job_id" type="hidden" value="{{ $singleJob->id }}">
+                                    <input name="user_id" type="hidden" value="{{ Auth::user()->id }}">
+                                    <input name="image" type="hidden" value="{{ $singleJob->image }}">
+                                    <input name="job_title" type="hidden" value="{{ $singleJob->job_title }}">
+                                    <input name="region" type="hidden" value="{{ $singleJob->region }}">
+                                    <input name="company_name" type="hidden" value="{{ $singleJob->company_name }}">
+                                    <input name="job_type" type="hidden" value="{{ $singleJob->job_type }}">
+                                    @if ($saved_job > 0)
+                                        <button class="btn btn-block btn-success btn-md" disabled>Job Already Save</button>
+                                    @else
+                                        <button name="submit" type="submit" class="btn btn-block btn-light btn-md"><i
+                                                class="icon-heart"></i>Save Job</button>
+                                    @endif
+
+                                </form>
                                 <!--add text-danger to it to make it read-->
                             </div>
                             <div class="col-6">
@@ -116,7 +146,7 @@
             </div>
     </section>
 
-    <section class="site-section" id="next">
+    <section style="padding-top:0px; padding-bottom:0px;" class="site-section" id="next">
         <div class="container">
 
             <div class="row mb-5 justify-content-center">
@@ -128,7 +158,7 @@
             <ul class="job-listings mb-5">
                 @foreach ($relatedJobs as $job)
                     <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
-                        <a href="job-single.html"></a>
+                        <a href="{{ route('single-job', $job->id) }}"></a>
                         <div class="job-listing-logo">
                             <img src="{{ $job->image }}" alt="Image" class="img-fluid">
                         </div>
