@@ -19,17 +19,17 @@
     </section>
 
     <div style="margin-top: 5px">
-        @if (Session::get('success'))
-            <div class="alert alert-success">
-                {{ Session::get('success') }}
-            </div>
-        @endif
+        @php
+            $alertTypes = ['success', 'error', 'info', 'warning'];
+        @endphp
 
-        @if (Session::get('fail'))
-            <div class="alert alert-danger">
-                {{ Session::get('fail') }}
-            </div>
-        @endif
+        @foreach ($alertTypes as $alertType)
+            @if (session()->has($alertType))
+                <div class="alert alert-{{ $alertType }}" id="alert-{{ $alertType }}">
+                    {{ session($alertType) }}
+                </div>
+            @endif
+        @endforeach
     </div>
 
 
@@ -104,7 +104,22 @@
                                 <!--add text-danger to it to make it read-->
                             </div>
                             <div class="col-6">
-                                <button class="btn btn-block btn-primary btn-md">Apply Now</button>
+                                <form action="{{ route('apply.job') }}" method="post">
+                                    @csrf
+                                    <input name="cv" type="hidden" value="{{ Auth::user()->cv }}">
+                                    <input name="user_id" type="hidden" value="{{ Auth::user()->id }}">
+                                    <input name="job_id" type="hidden" value="{{ $singleJob->id }}">
+                                    <input name="image" type="hidden" value="{{ $singleJob->image }}">
+                                    <input name="job_title" type="hidden" value="{{ $singleJob->job_title }}">
+                                    <input name="region" type="hidden" value="{{ $singleJob->region }}">
+                                    <input name="company_name" type="hidden" value="{{ $singleJob->company_name }}">
+                                    <input name="job_type" type="hidden" value="{{ $singleJob->job_type }}">
+                                    <button type="submit" name="submit" class="btn btn-block btn-primary btn-md">Apply
+                                        Now</button>
+
+                                </form>
+
+
                             </div>
                         </div>
 
@@ -246,4 +261,16 @@
             </div>
         </div>
     </section>
+
+    <script>
+        // Auto-hide all alert messages after 5 seconds
+        setTimeout(function() {
+            @foreach ($alertTypes as $alertType)
+                var alert = document.getElementById('alert-{{ $alertType }}');
+                if (alert) {
+                    alert.style.display = 'none';
+                }
+            @endforeach
+        }, 5000); // Hide after 5 seconds
+    </script>
 @endsection

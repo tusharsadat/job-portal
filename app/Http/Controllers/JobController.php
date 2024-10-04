@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Application;
 use App\Models\Category;
 use App\Models\Job;
 use App\Models\SaveJob;
@@ -49,6 +50,28 @@ class JobController extends Controller
 
         if ($savejob) {
             return redirect('/jobs/singleJob/' . $request->job_id)->with('success', 'job saved successfully');
+        }
+    }
+
+    public function applyJob(Request $request)
+    {
+        if ($request->cv == 'No CV') {
+            return redirect('/jobs/singleJob/' . $request->job_id)->with('warning', 'upload your cv first');
+        } else {
+            $applyjob = Application::create([
+                'cv' => $request->cv,
+                'job_id' => $request->job_id,
+                'user_id' => $request->user_id,
+                'job_title' => $request->job_title,
+                'region' => $request->region,
+                'company_name' => $request->company_name,
+                'job_type' => $request->job_type,
+                'image' => $request->image,
+            ]);
+
+            if ($applyjob) {
+                return redirect('/jobs/singleJob/' . $request->job_id)->with('success', 'job apply successfully');
+            }
         }
     }
 }
