@@ -114,8 +114,13 @@
                                     <input name="region" type="hidden" value="{{ $singleJob->region }}">
                                     <input name="company_name" type="hidden" value="{{ $singleJob->company_name }}">
                                     <input name="job_type" type="hidden" value="{{ $singleJob->job_type }}">
-                                    <button type="submit" name="submit" class="btn btn-block btn-primary btn-md">Apply
-                                        Now</button>
+                                    @if ($apply_job > 0)
+                                        <button class="btn btn-block btn-success btn-md" disabled>Job Already
+                                            applied</button>
+                                    @else
+                                        <button name="submit" type="submit"
+                                            class="btn btn-block btn-primary btn-md">Apply Job</button>
+                                    @endif
 
                                 </form>
 

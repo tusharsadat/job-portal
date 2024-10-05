@@ -27,13 +27,18 @@ class JobController extends Controller
             ->where('id', '!=', $singleJob->id)
             ->count();
 
-        // Saved job
+        // Verifying if user Saved the job
         $saved_job = SaveJob::where('job_id', $id)
             ->where('user_id', Auth::user()->id)
             ->count();
 
+        // Verifying if user applied the job
+        $apply_job = Application::where('job_id', $id)
+            ->where('user_id', Auth::user()->id)
+            ->count();
 
-        return view('/jobs.singleJob', compact('singleJob', 'relatedJobs', 'relatedJobCount', 'saved_job'));
+
+        return view('/jobs.singleJob', compact('singleJob', 'relatedJobs', 'relatedJobCount', 'saved_job', 'apply_job'));
     }
 
     public function singleJobSave(Request $request)
