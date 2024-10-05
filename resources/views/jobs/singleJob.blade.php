@@ -161,6 +161,17 @@
                             </div>
                         </div>
 
+                        <div class="bg-light p-3 mt-4 border rounded">
+                            <h3 class="text-primary  mt-3 h5 pl-3 mb-3 ">Job category</h3>
+                            <div class="px-3">
+                                @foreach ($categories as $categorie)
+                                    <ul class="list-unstyled mb-0">
+                                        <li class="mb-1"><a href="">{{ $categorie->name }}</a></li>
+                                    </ul>
+                                @endforeach
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>

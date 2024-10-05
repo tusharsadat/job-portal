@@ -37,8 +37,10 @@ class JobController extends Controller
             ->where('user_id', Auth::user()->id)
             ->count();
 
+        // get all categories
+        $categories = Category::all();
 
-        return view('/jobs.singleJob', compact('singleJob', 'relatedJobs', 'relatedJobCount', 'saved_job', 'apply_job'));
+        return view('/jobs.singleJob', compact('singleJob', 'relatedJobs', 'relatedJobCount', 'saved_job', 'apply_job', 'categories'));
     }
 
     public function singleJobSave(Request $request)
