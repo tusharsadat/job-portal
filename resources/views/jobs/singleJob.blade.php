@@ -166,7 +166,8 @@
                             <div class="px-3">
                                 @foreach ($categories as $categorie)
                                     <ul class="list-unstyled mb-0">
-                                        <li class="mb-1"><a href=""
+                                        <li class="mb-1"><a
+                                                href="{{ route('single.category', ['id' => $categorie->id, 'name' => $categorie->name]) }}"
                                                 class="text-decoration-none">{{ $categorie->name }}</a></li>
                                     </ul>
                                 @endforeach

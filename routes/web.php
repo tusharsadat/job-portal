@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\JobController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,3 +28,5 @@ Route::get('/jobs/singleJob/{id}', [JobController::class, 'index'])->name('singl
 Route::post('/jobs/saveJob', [JobController::class, 'singleJobSave'])->name('save.job');
 
 Route::post('/jobs/applyJob', [JobController::class, 'applyJob'])->name('apply.job');
+
+Route::get('/categories/singleCategory/{id}/{name}', [CategoryController::class, 'getJobsByCategory'])->name('single.category');
