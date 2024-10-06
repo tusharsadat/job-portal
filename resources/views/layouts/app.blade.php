@@ -107,6 +107,9 @@
                                             <a class="dropdown-item" href="{{ route('profile') }}">
                                                 Profile
                                             </a>
+                                            <a class="dropdown-item" href="{{ route('applications') }}">
+                                                Applications
+                                            </a>
                                             <style>
                                                 .dropdown-item:hover {
                                                     color: #0d6efd;

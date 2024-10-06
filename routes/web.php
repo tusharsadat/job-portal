@@ -33,3 +33,4 @@ Route::post('/jobs/applyJob', [JobController::class, 'applyJob'])->name('apply.j
 Route::get('/categories/singleCategory/{id}/{name}', [CategoryController::class, 'getJobsByCategory'])->name('single.category');
 
 Route::get('/users/profile', [UserController::class, 'profile'])->name('profile');
+Route::get('/users/applications', [UserController::class, 'applications'])->name('applications');

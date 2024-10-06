@@ -16,8 +16,10 @@
                         <div class="text-center mt-3">
                             <!-- <span class="bg-secondary p-1 px-4 rounded text-white">Pro</span> -->
                             <h5 class="mt-2 mb-0">{{ $profile->name }}</h5>
-                            <a href="{{ asset('assets/cvs/' . $profile->cv) }}" class="btn btn-info btn-block">Download CV</a>
                             <span>{{ $profile->job_title }}</span>
+                            <a href="{{ asset('assets/cvs/' . $profile->cv) }}" class="btn btn-info btn-block">Download
+                                CV</a>
+
 
                             <div class="px-4 mt-1">
                                 <p class="fonts">{{ $profile->bio }}</p>
