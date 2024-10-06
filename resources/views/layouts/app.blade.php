@@ -103,11 +103,26 @@
                                     </a>
 
                                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
+                                        <div>
+                                            <a class="dropdown-item" href="{{ route('profile') }}">
+                                                Profile
+                                            </a>
+                                            <style>
+                                                .dropdown-item:hover {
+                                                    color: #0d6efd;
+                                                    /* Change color on hover */
+                                                }
+                                            </style>
+                                        </div>
+
+                                        <div>
+                                            <a class="dropdown-item" href="{{ route('logout') }}"
+                                                onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                            {{ __('Logout') }}
-                                        </a>
+                                                {{ __('Logout') }}
+                                            </a>
+                                        </div>
+
 
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                             class="d-none">
