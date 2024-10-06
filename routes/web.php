@@ -34,3 +34,4 @@ Route::get('/categories/singleCategory/{id}/{name}', [CategoryController::class,
 
 Route::get('/users/profile', [UserController::class, 'profile'])->name('profile');
 Route::get('/users/applications', [UserController::class, 'applications'])->name('applications');
+Route::get('/users/savedJob', [UserController::class, 'savedJob'])->name('saved.job');
