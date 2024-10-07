@@ -22,7 +22,7 @@
 
 
                             <div class="px-4 mt-1">
-                                <p class="fonts">{{ $profile->bio }}</p>
+                                <p class="fonts">{{ $profile->user_bio }}</p>
 
                             </div>
 
