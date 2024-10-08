@@ -8,6 +8,20 @@
                 <div class="col-md-7">
                     <div class="card p-3 py-4">
 
+                        <div style="margin-top: 5px">
+                            @php
+                                $alertTypes = ['success', 'error', 'info', 'warning'];
+                            @endphp
+
+                            @foreach ($alertTypes as $alertType)
+                                @if (session()->has($alertType))
+                                    <div class="alert alert-{{ $alertType }}" id="alert-{{ $alertType }}">
+                                        {{ session($alertType) }}
+                                    </div>
+                                @endif
+                            @endforeach
+                        </div>
+
                         <div class="text-center">
                             <img src="{{ asset('assets/profile_images/' . $profile->image) }}" width="100"
                                 class="rounded-circle">
@@ -49,4 +63,15 @@
 
         </div>
     </section>
+    <script>
+        // Auto-hide all alert messages after 5 seconds
+        setTimeout(function() {
+            @foreach ($alertTypes as $alertType)
+                var alert = document.getElementById('alert-{{ $alertType }}');
+                if (alert) {
+                    alert.style.display = 'none';
+                }
+            @endforeach
+        }, 5000); // Hide after 5 seconds
+    </script>
 @endsection

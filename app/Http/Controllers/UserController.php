@@ -27,4 +27,28 @@ class UserController extends Controller
         $savedJobs = SaveJob::where('user_id', Auth::user()->id)->paginate(5);
         return view('users.savedJob', compact('savedJobs'));
     }
+
+    public function editUser()
+    {
+        $editUser = User::find(Auth::user()->id);
+        return view('users.editUser', compact('editUser'));
+    }
+
+    public function updateUser(Request $request)
+    {
+
+        $userdetailsUpdate = User::find(Auth::user()->id);
+        $userdetailsUpdate->update([
+            'name' => $request->name,
+            'job_title' => $request->job_title,
+            'user_bio' => $request->user_bio,
+            'facebook' => $request->facebook,
+            'twitter' => $request->twitter,
+            'linkedin' => $request->linkedin,
+        ]);
+
+        if ($userdetailsUpdate) {
+            return redirect()->route('profile')->with('success', 'Profile update successfully.');
+        }
+    }
 }
