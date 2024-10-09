@@ -42,11 +42,17 @@
                             <input type="text" name="name" value="{{ $editUser->name }}" class="form-control"
                                 id="name" placeholder="Enter Name">
                         </div>
+                        @error('name')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                         <div class="form-group">
                             <label for="job-title">Job Title</label>
                             <input type="text" name="job_title" value="{{ $editUser->job_title }}" class="form-control"
                                 id="job-title" placeholder="Enter job title">
                         </div>
+                        @error('job-title')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                         <div class="row form-group">
                             <div class="col-md-12">
                                 <label class="text-black" for="">User bio</label>
@@ -54,6 +60,9 @@
                                     class="form-control" placeholder="Write user biodata..."></textarea>
                             </div>
                         </div>
+                        @error('user_bio')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                         <div class="form-group">
                             <label for="facebook">Facebook</label>
                             <input type="text" name="facebook" value="{{ $editUser->facebook }}" class="form-control"

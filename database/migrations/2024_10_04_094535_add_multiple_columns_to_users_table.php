@@ -15,9 +15,9 @@ return new class extends Migration
             $table->string('cv')->default('No CV')->after('password');
             $table->string('job_title')->default('No job title')->after('cv');
             $table->string('bio')->default('No bio')->after('job_title');
-            $table->string('facebook')->default('No facebook')->after('bio');
-            $table->string('linkedin')->default('No linkedin')->after('facebook');
-            $table->string('twitter')->default('No twitter')->after('linkedin');
+            $table->string('facebook')->nullable()->after('bio');
+            $table->string('linkedin')->nullable()->after('facebook');
+            $table->string('twitter')->nullable()->after('linkedin');
         });
     }
 
