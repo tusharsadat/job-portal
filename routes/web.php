@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,18 +24,26 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::controller(HomeController::class)->group(function () {
+    Route::get('/', 'index')->name('home');
+});
 
-Route::get('/jobs/singleJob/{id}', [JobController::class, 'index'])->name('single-job');
-Route::post('/jobs/saveJob', [JobController::class, 'singleJobSave'])->name('save.job');
-Route::post('/jobs/applyJob', [JobController::class, 'applyJob'])->name('apply.job');
+Route::controller(JobController::class)->group(function () {
+    Route::get('/jobs/singleJob/{id}', 'index')->name('single-job');
+    Route::post('/jobs/saveJob', 'singleJobSave')->name('save.job');
+    Route::post('/jobs/applyJob', 'applyJob')->name('apply.job');
+});
 
-Route::get('/categories/singleCategory/{id}/{name}', [CategoryController::class, 'getJobsByCategory'])->name('single.category');
+Route::controller(CategoryController::class)->group(function () {
+    Route::get('/categories/singleCategory/{id}/{name}', 'getJobsByCategory')->name('single.category');
+});
 
-Route::get('/users/profile', [UserController::class, 'profile'])->name('profile');
-Route::get('/users/applications', [UserController::class, 'applications'])->name('applications');
-Route::get('/users/savedJob', [UserController::class, 'savedJob'])->name('saved.job');
-Route::get('/users/editUser', [UserController::class, 'editUser'])->name('edit.user');
-Route::post('/users/updateUser', [UserController::class, 'updateUser'])->name('update.user');
-Route::get('/users/editCV', [UserController::class, 'editCV'])->name('edit.CV');
-Route::post('/users/updateCV', [UserController::class, 'updateCV'])->name('update.CV');
+Route::controller(UserController::class)->group(function () {
+    Route::get('/users/profile', 'profile')->name('profile');
+    Route::get('/users/applications', 'applications')->name('applications');
+    Route::get('/users/savedJob',  'savedJob')->name('saved.job');
+    Route::get('/users/editUser',  'editUser')->name('edit.user');
+    Route::post('/users/updateUser',  'updateUser')->name('update.user');
+    Route::get('/users/editCV', 'editCV')->name('edit.CV');
+    Route::post('/users/updateCV',  'updateCV')->name('update.CV');
+});
