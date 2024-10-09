@@ -31,7 +31,7 @@
                             <!-- <span class="bg-secondary p-1 px-4 rounded text-white">Pro</span> -->
                             <h5 class="mt-2 mb-0">{{ $profile->name }}</h5>
                             <span>{{ $profile->job_title }}</span>
-                            <a href="{{ asset('assets/cvs/' . $profile->cv) }}" class="btn btn-info btn-block">Download
+                            <a href="{{ Storage::url($profile->cv) }}" class="btn btn-info btn-block">Download
                                 CV</a>
 
 
@@ -48,19 +48,10 @@
                                 <a href="{{ $profile->linkedin }}" class="pt-3 pb-3 pr-3 pl-0"><span
                                         class="icon-linkedin"></span></a>
                             </div>
-
-
-
                         </div>
-
-
-
-
                     </div>
                 </div>
             </div>
-
-
         </div>
     </section>
     <script>

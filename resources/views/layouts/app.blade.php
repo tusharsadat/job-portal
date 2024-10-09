@@ -116,6 +116,9 @@
                                             <a class="dropdown-item" href="{{ route('edit.user') }}">
                                                 Change User Info
                                             </a>
+                                            <a class="dropdown-item" href="{{ route('edit.CV') }}">
+                                                Update cv
+                                            </a>
                                             <style>
                                                 .dropdown-item:hover {
                                                     color: #0d6efd;
