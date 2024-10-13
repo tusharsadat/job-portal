@@ -25,9 +25,12 @@ class HomeController extends Controller
      */
     public function index()
     {
+        // Get all unique region values from the jobs table
+        $regions = Job::select('region')->distinct()->get();
+
         $latestJobs = Job::latest()->take(5)->get();
         $jobCount = Job::count();
 
-        return view('/home', compact('jobCount', 'latestJobs'));
+        return view('/home', compact('jobCount', 'latestJobs', 'regions'));
     }
 }

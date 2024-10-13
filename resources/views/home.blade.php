@@ -21,16 +21,11 @@
                             </div>
                             <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
                                 <select class="selectpicker" data-style="btn-white btn-lg" data-width="100%"
-                                    data-live-search="true" title="Select Region">
-                                    <option>Anywhere</option>
-                                    <option>San Francisco</option>
-                                    <option>Palo Alto</option>
-                                    <option>New York</option>
-                                    <option>Manhattan</option>
-                                    <option>Ontario</option>
-                                    <option>Toronto</option>
-                                    <option>Kansas</option>
-                                    <option>Mountain View</option>
+                                    data-live-search="true" title="Select Region" name="region">
+                                    @foreach ($regions as $region)
+                                        <option value="{{ $region->id }}">{{ $region->region }}</option>
+                                    @endforeach
+
                                 </select>
                             </div>
                             <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
