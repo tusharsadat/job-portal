@@ -26,6 +26,7 @@ Auth::routes();
 
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index')->name('home');
+    Route::post('/jobs/search', 'searchJobs')->name('jobs.search');
 });
 
 Route::controller(JobController::class)->group(function () {

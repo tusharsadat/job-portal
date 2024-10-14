@@ -13,30 +13,50 @@
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate est, consequuntur
                             perferendis.</p>
                     </div>
-                    <form method="post" class="search-jobs-form">
+                    <form method="post" action="{{ route('jobs.search') }}" class="search-jobs-form">
+                        @csrf
                         <div class="row mb-5">
                             <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
-                                <input type="text" class="form-control form-control-lg"
-                                    placeholder="Job title, Company...">
+                                <input type="text" name="job_title" class="form-control form-control-lg"
+                                    placeholder="Job title">
+                                <div>
+                                    @error('job_title')
+                                        <div class="text-warning">{{ $message }}</div>
+                                    @enderror
+                                </div>
                             </div>
+
                             <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
                                 <select class="selectpicker" data-style="btn-white btn-lg" data-width="100%"
                                     data-live-search="true" title="Select Region" name="region">
                                     @foreach ($regions as $region)
-                                        <option value="{{ $region->id }}">{{ $region->region }}</option>
+                                        <option value="{{ $region->region }}">{{ $region->region }}</option>
                                     @endforeach
 
                                 </select>
+                                <div>
+                                    @error('region')
+                                        <div class="text-warning">{{ $message }}</div>
+                                    @enderror
+                                </div>
                             </div>
+
                             <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
-                                <select class="selectpicker" data-style="btn-white btn-lg" data-width="100%"
+                                <select class="selectpicker" name="job_type" data-style="btn-white btn-lg" data-width="100%"
                                     data-live-search="true" title="Select Job Type">
                                     <option>Part Time</option>
                                     <option>Full Time</option>
                                 </select>
+                                <div>
+                                    @error('job_type')
+                                        <div class="text-warning">{{ $message }}</div>
+                                    @enderror
+                                </div>
                             </div>
+
                             <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
-                                <button type="submit" class="btn btn-primary btn-lg btn-block text-white btn-search"><span
+                                <button name="submit" type="submit"
+                                    class="btn btn-primary btn-lg btn-block text-white btn-search"><span
                                         class="icon-search icon mr-2"></span>Search Job</button>
                             </div>
                         </div>
