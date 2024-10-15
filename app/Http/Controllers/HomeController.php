@@ -25,13 +25,22 @@ class HomeController extends Controller
      */
     public function index()
     {
+        // Build the query to get the latest 5 keywords where the length is greater than 1
+        $keywords = Search::select('keyword')
+            ->whereRaw('LENGTH(keyword) > 1')  // Keywords longer than one character
+            ->groupBy('keyword')
+            ->havingRaw('COUNT(*) > 1')  // Only get keywords that appear more than once
+            ->orderByRaw('MAX(created_at) desc')  // Order by the most recent occurrence
+            ->limit(5)
+            ->get();
+
         // Get all unique region values from the jobs table
         $regions = Job::select('region')->distinct()->get();
 
         $latestJobs = Job::latest()->take(5)->get();
         $jobCount = Job::count();
 
-        return view('/home', compact('jobCount', 'latestJobs', 'regions'));
+        return view('/home', compact('jobCount', 'latestJobs', 'regions', 'keywords'));
     }
 
     public function searchJobs(Request $request)
