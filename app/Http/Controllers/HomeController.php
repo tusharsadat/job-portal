@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Job;
-
+use App\Models\Search;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -40,6 +40,10 @@ class HomeController extends Controller
             'job_title' => 'required',
             'region' => 'required',
             'job_type' => 'required',
+        ]);
+
+        $search_keyword = Search::create([
+            'keyword' => $request->job_title
         ]);
 
         // Get the search inputs from the request
