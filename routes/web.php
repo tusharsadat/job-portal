@@ -50,4 +50,6 @@ Route::controller(UserController::class)->group(function () {
     Route::post('/users/updateCV',  'updateCV')->name('update.CV');
 });
 
-Route::get('/admin/login', [AdminController::class, 'loginView'])->name('admin.login');
+Route::get('/admin/login', [AdminController::class, 'loginView'])->name('view.login');
+Route::post('/admin/login', [AdminController::class, 'checkLogin'])->name('check.login');
+Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
