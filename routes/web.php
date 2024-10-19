@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JobController;
@@ -48,3 +49,5 @@ Route::controller(UserController::class)->group(function () {
     Route::get('/users/editCV', 'editCV')->name('edit.CV');
     Route::post('/users/updateCV',  'updateCV')->name('update.CV');
 });
+
+Route::get('/admin/login', [AdminController::class, 'loginView'])->name('admin.login');
