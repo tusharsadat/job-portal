@@ -18,9 +18,9 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/admin', function () {
+//     return view('layouts.admin.admin');
+// });
 
 Auth::routes();
 
