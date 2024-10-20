@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Job;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
@@ -58,5 +59,26 @@ class AdminController extends Controller
     {
         $allAdmins = Admin::latest()->get();
         return view('admin.allAdmins', compact('allAdmins'));
+    }
+
+    //Create new admin
+    public function createAdmin()
+    {
+        return view('admin.create');
+    }
+    //Store admin data
+    public function storeAdmin(Request $request)
+    {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:admins'],
+            'password' => ['required', 'string', 'min:8'],
+        ]);
+        Admin::create([
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'password' => Hash::make($request['password']),
+        ]);
+        return redirect()->route('all.admins')->with('success', 'Product created successfully.');
     }
 }
