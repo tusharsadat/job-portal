@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -26,5 +27,18 @@ class AdminController extends Controller
     public function index()
     {
         return view('admin.index');
+    }
+
+    // Admin logout method
+    public function logout(Request $request)
+    {
+        Auth::guard('admin')->logout();  // Logs out the admin
+
+        // Optionally, invalidate the session and regenerate the CSRF token
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        // Redirect to login or another page
+        return redirect('/admin/login')->with('status', 'Admin logged out successfully!');
     }
 }

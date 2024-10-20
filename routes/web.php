@@ -27,6 +27,7 @@ Auth::routes();
 
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index')->name('home');
+    //Route::get('/home', 'index')->name('home'); // Add this line to handle `/home`
     Route::post('/jobs/search', 'searchJobs')->name('jobs.search');
 });
 
@@ -39,17 +40,28 @@ Route::controller(JobController::class)->group(function () {
 Route::controller(CategoryController::class)->group(function () {
     Route::get('/categories/singleCategory/{id}/{name}', 'getJobsByCategory')->name('single.category');
 });
-
-Route::controller(UserController::class)->group(function () {
-    Route::get('/users/profile', 'profile')->name('profile');
-    Route::get('/users/applications', 'applications')->name('applications');
-    Route::get('/users/savedJob',  'savedJob')->name('saved.job');
-    Route::get('/users/editUser',  'editUser')->name('edit.user');
-    Route::post('/users/updateUser',  'updateUser')->name('update.user');
-    Route::get('/users/editCV', 'editCV')->name('edit.CV');
-    Route::post('/users/updateCV',  'updateCV')->name('update.CV');
+Route::middleware('auth')->group(function () {
+    Route::controller(UserController::class)->group(function () {
+        Route::get('/users/profile', 'profile')->name('profile');
+        Route::get('/users/applications', 'applications')->name('applications');
+        Route::get('/users/savedJob',  'savedJob')->name('saved.job');
+        Route::get('/users/editUser',  'editUser')->name('edit.user');
+        Route::post('/users/updateUser',  'updateUser')->name('update.user');
+        Route::get('/users/editCV', 'editCV')->name('edit.CV');
+        Route::post('/users/updateCV',  'updateCV')->name('update.CV');
+    });
 });
 
-Route::get('/admin/login', [AdminController::class, 'loginView'])->name('view.login');
-Route::post('/admin/login', [AdminController::class, 'checkLogin'])->name('check.login');
-Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+
+
+Route::controller(AdminController::class)->group(function () {
+    Route::get('/admin/login', 'loginView')->name('admin.login')->middleware('CheckForAuth');
+    Route::post('/admin/login', 'checkLogin')->name('check.login');
+    Route::post('/admin/logout', 'logout')->name('admin.logout');
+});
+
+Route::middleware('auth:admin')->group(function () {
+    Route::controller(AdminController::class)->group(function () {
+        Route::get('/admin/dashboard', 'index')->name('admin.dashboard');
+    });
+});
