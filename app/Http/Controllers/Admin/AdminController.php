@@ -79,6 +79,6 @@ class AdminController extends Controller
             'email' => $request['email'],
             'password' => Hash::make($request['password']),
         ]);
-        return redirect()->route('all.admins')->with('success', 'Product created successfully.');
+        return redirect()->route('all.admins')->with('success', 'Admin created successfully.');
     }
 }

@@ -2,6 +2,17 @@
 @section('content')
     <div class="row">
         <div class="col">
+            @if (Session::get('success'))
+                <div class="alert alert-success">
+                    {{ Session::get('success') }}
+                </div>
+            @endif
+
+            @if (Session::get('fail'))
+                <div class="alert alert-danger">
+                    {{ Session::get('fail') }}
+                </div>
+            @endif
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title mb-4 d-inline">ALL Admins</h5>
