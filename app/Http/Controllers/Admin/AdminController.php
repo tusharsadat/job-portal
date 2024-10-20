@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Admin;
+use App\Models\Application;
+use App\Models\Category;
+use App\Models\Job;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -30,7 +33,11 @@ class AdminController extends Controller
     //View admin dashboard method
     public function dashboard()
     {
-        return view('admin.index');
+        $jobCount = Job::count();
+        $categoryCount = Category::count();
+        $adminCount = Admin::count();
+        $applicationCount = Application::count();
+        return view('admin.index', compact('jobCount', 'categoryCount', 'adminCount', 'applicationCount'));
     }
 
     // Admin logout method
