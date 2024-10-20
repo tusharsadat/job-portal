@@ -57,7 +57,7 @@ class AdminController extends Controller
     //View all admin method
     public function allAdmins()
     {
-        $allAdmins = Admin::latest()->get();
+        $allAdmins = Admin::get();
         return view('admin.allAdmins', compact('allAdmins'));
     }
 
