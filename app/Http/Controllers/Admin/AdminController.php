@@ -88,4 +88,20 @@ class AdminController extends Controller
         $allCategory = Category::paginate(10);
         return view('admin.allCategory', compact('allCategory'));
     }
+    //Create new category
+    public function createCategory()
+    {
+        return view('admin.createCategory');
+    }
+    //Store category data
+    public function storeCategory(Request $request)
+    {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+        ]);
+        Category::create([
+            'name' => $request['name'],
+        ]);
+        return redirect()->route('all.category')->with('success', 'Category created successfully.');
+    }
 }
