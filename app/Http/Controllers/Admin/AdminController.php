@@ -81,4 +81,11 @@ class AdminController extends Controller
         ]);
         return redirect()->route('all.admins')->with('success', 'Admin created successfully.');
     }
+
+    //Display all category
+    public function allCategory()
+    {
+        $allCategory = Category::get();
+        return view('admin.allCategory', compact('allCategory'));
+    }
 }

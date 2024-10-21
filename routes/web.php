@@ -66,5 +66,6 @@ Route::middleware('auth:admin')->group(function () {
         Route::get('/admin/all-admins', 'allAdmins')->name('all.admins');
         Route::get('/admin/create-admin', 'createAdmin')->name('create.admin');
         Route::post('/admin/store-admin', 'storeAdmin')->name('store.admin');
+        Route::get('/admin/all-category', 'allCategory')->name('all.category');
     });
 });

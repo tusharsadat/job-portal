@@ -35,7 +35,7 @@
                                 <a class="nav-link" href="{{ route('all.admins') }}" style="margin-left: 20px;">Admins</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="categories-admins/show-categories.html"
+                                <a class="nav-link" href="{{ route('all.category') }}"
                                     style="margin-left: 20px;">Categories</a>
                             </li>
                             <li class="nav-item">
