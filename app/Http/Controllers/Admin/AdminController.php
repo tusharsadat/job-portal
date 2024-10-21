@@ -85,7 +85,7 @@ class AdminController extends Controller
     //Display all category
     public function allCategory()
     {
-        $allCategory = Category::get();
+        $allCategory = Category::paginate(10);
         return view('admin.allCategory', compact('allCategory'));
     }
 }

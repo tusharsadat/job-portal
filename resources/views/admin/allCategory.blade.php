@@ -29,6 +29,8 @@
                     </table>
                 </div>
             </div>
+            <!-- Display pagination links -->
+            {{ $allCategory->links() }}
         </div>
     </div>
 @endsection
