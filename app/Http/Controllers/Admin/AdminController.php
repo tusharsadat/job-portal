@@ -97,11 +97,33 @@ class AdminController extends Controller
     public function storeCategory(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:255', 'unique:categories'],
         ]);
         Category::create([
-            'name' => $request['name'],
+            'name' => $request->name,
         ]);
         return redirect()->route('all.category')->with('success', 'Category created successfully.');
+    }
+
+    public function editCategory($id)
+    {
+        $categoryinfo = Category::findOrFail($id);
+        return view('admin.editcategory', compact('categoryinfo'));
+    }
+
+    public function updateCategory(Request $request)
+    {
+        $category_id = $request->category_id;
+        //dd($request->all());
+
+        $request->validate([
+            'name' => ['required', 'string', 'max:255', 'unique:categories'],
+        ]);
+
+        Category::findOrFail($category_id)->update([
+            'name' => $request['name'],
+        ]);
+
+        return redirect()->route('all.category')->with('success', 'Category update successfully');
     }
 }
