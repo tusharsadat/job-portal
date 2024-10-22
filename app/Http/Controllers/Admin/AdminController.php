@@ -126,4 +126,11 @@ class AdminController extends Controller
 
         return redirect()->route('all.category')->with('success', 'Category update successfully');
     }
+    //delete method
+    public function deleteCategory($id)
+    {
+        Category::findOrFail($id)->delete();
+
+        return redirect()->route('all.category')->with('success', 'Category delete successfully');
+    }
 }
