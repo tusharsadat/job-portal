@@ -39,7 +39,7 @@
                                     style="margin-left: 20px;">Categories</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="jobs-admins/show-jobs.html" style="margin-left: 20px;">Jobs</a>
+                                <a class="nav-link" href="{{ route('all.job') }}" style="margin-left: 20px;">Jobs</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="applications-admins/show-apps.html"

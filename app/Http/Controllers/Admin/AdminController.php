@@ -133,4 +133,13 @@ class AdminController extends Controller
 
         return redirect()->route('all.category')->with('success', 'Category delete successfully');
     }
+
+    //Display all job
+    public function allJob()
+    {
+        // Query to get jobs along with their categories, paginated 10 per page
+        $allJobs = Job::with('category') // Eager load the category to avoid N+1 problem
+            ->paginate(10);    // Paginate results, 10 jobs per page
+        return view('admin.allJob', compact('allJobs'));
+    }
 }

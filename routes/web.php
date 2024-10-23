@@ -76,5 +76,8 @@ Route::middleware('auth:admin')->group(function () {
         Route::get('/admin/edit-category/{id}', 'editCategory')->name('edit.category');
         Route::post('/admin/update-category', 'updateCategory')->name('update.category');
         Route::get('/admin/delete-category/{id}', 'deleteCategory')->name('delete.category');
+
+        //Job route
+        Route::get('/admin/all-job', 'allJob')->name('all.job');
     });
 });
