@@ -79,5 +79,7 @@ Route::middleware('auth:admin')->group(function () {
 
         //Job route
         Route::get('/admin/all-job', 'allJob')->name('all.job');
+        Route::get('/admin/create-job', 'createJob')->name('create.job');
+        Route::post('/admin/store-job', 'storeJob')->name('store.job');
     });
 });

@@ -23,9 +23,9 @@ return new class extends Migration
             $table->string('gender')->nullable();
             $table->string('application_deadline')->require();
             $table->text('job_des')->nullable();
-            $table->string('responsibilities');
-            $table->string('education_experience')->require();
-            $table->string('other_benifits')->nullable();
+            $table->text('responsibilities')->nullable();
+            $table->text('education_experience')->require();
+            $table->text('other_benifits')->nullable();
             $table->string('image')->nullable();
             $table->timestamps();
         });

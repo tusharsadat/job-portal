@@ -142,4 +142,52 @@ class AdminController extends Controller
             ->paginate(10);    // Paginate results, 10 jobs per page
         return view('admin.allJob', compact('allJobs'));
     }
+    //Create new job
+    public function createJob()
+    {
+        $categories = Category::latest()->get();
+        return view('admin.createJob', compact('categories'));
+    }
+    //Store category data
+    public function storeJob(Request $request)
+    {
+        $request->validate([
+            'job_title' => 'required|string|max:255',
+            'region' => 'required|string|max:255',
+            'company_name' => 'required|string|max:255',
+            'job_type' => 'required',
+            'vacancy' => 'required',
+            'experience' => 'required',
+            'salary' => 'required',
+            'gender' => 'required',
+            'application_deadline' => 'required',
+            'job_des' => 'required',
+            'responsibilities' => 'required',
+            'education_experience' => 'required',
+            'other_benifits' => 'nullable',
+            'category_id' => 'required|exists:categories,id',
+            'image' =>  'mimes:jpeg,jpg,png,gif|nullable|max:10000',
+        ]);
+        //$category_id = $request->category_id;
+        // Store the new file
+        $path = $request->file('image')->store('images', 'public'); // stores in the storage/app/cvs directory
+        Job::create([
+            'job_title' => $request->job_title,
+            'region' => $request->region,
+            'company_name' => $request->company_name,
+            'job_type' => $request->job_type,
+            'vacancy' => $request->vacancy,
+            'experience' => $request->experience,
+            'salary' => $request->salary,
+            'gender' => $request->gender,
+            'application_deadline' => $request->application_deadline,
+            'job_des' => $request->job_des,
+            'responsibilities' => $request->responsibilities,
+            'education_experience' => $request->education_experience,
+            'other_benifits' => $request->other_benifits,
+            'category_id' => $request->category_id,
+            'image' => $path,
+        ]);
+        return redirect()->route('all.job')->with('success', 'Job created successfully.');
+    }
 }
