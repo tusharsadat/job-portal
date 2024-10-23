@@ -151,6 +151,7 @@ class AdminController extends Controller
     //Store category data
     public function storeJob(Request $request)
     {
+        // Validate the fields
         $request->validate([
             'job_title' => 'required|string|max:255',
             'region' => 'required|string|max:255',
@@ -166,12 +167,11 @@ class AdminController extends Controller
             'education_experience' => 'required',
             'other_benifits' => 'nullable',
             'category_id' => 'required|exists:categories,id',
-            'image' =>  'mimes:jpeg,jpg,png,gif|nullable|max:10000',
+            'image' =>  'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',  // Image is optional
         ]);
-        //$category_id = $request->category_id;
-        // Store the new file
-        $path = $request->file('image')->store('images', 'public'); // stores in the storage/app/cvs directory
-        Job::create([
+
+        // Prepare the data for storing
+        $data = [
             'job_title' => $request->job_title,
             'region' => $request->region,
             'company_name' => $request->company_name,
@@ -186,8 +186,17 @@ class AdminController extends Controller
             'education_experience' => $request->education_experience,
             'other_benifits' => $request->other_benifits,
             'category_id' => $request->category_id,
-            'image' => $path,
-        ]);
+
+        ];
+
+        // If an image is uploaded, store it
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('images', 'public'); // stores in the storage/app/images directory
+            $data['image'] = $path;
+        }
+        // Save the data (with or without the image)
+        Job::create($data);
+
         return redirect()->route('all.job')->with('success', 'Job created successfully.');
     }
 }

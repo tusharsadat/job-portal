@@ -14,6 +14,11 @@
                             <label for="job-title">Job Title</label>
                             <input type="text" name="job_title" class="form-control" id="job_title"
                                 placeholder="Enter job title">
+                            <div>
+                                @error('job_title')
+                                    <div class="text-warning">{{ $message }}</div>
+                                @enderror
+                            </div>
                         </div>
 
 
@@ -21,11 +26,21 @@
                             <label for="region">Region</label>
                             <input type="text" name="region" class="form-control" id="region"
                                 placeholder="Enter job location">
+                            <div>
+                                @error('region')
+                                    <div class="text-warning">{{ $message }}</div>
+                                @enderror
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="company_name">Company</label>
                             <input type="text" name="company_name" class="form-control" id="company_name"
                                 placeholder="company">
+                            <div>
+                                @error('company_name')
+                                    <div class="text-warning">{{ $message }}</div>
+                                @enderror
+                            </div>
                         </div>
 
                         <div class="form-group">
@@ -35,21 +50,41 @@
                                 <option value="Part Time">Part Time</option>
                                 <option value="Full Time">Full Time</option>
                             </select>
+                            <div>
+                                @error('job_type')
+                                    <div class="text-warning">{{ $message }}</div>
+                                @enderror
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="job_vacancy">Vacancy</label>
                             <input name="vacancy" type="text" class="form-control" id="job-vacancy"
                                 placeholder="Enter total vacancy">
+                            <div>
+                                @error('vacancy')
+                                    <div class="text-warning">{{ $message }}</div>
+                                @enderror
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="job-experience">Experience</label>
                             <input name="experience" type="text" class="form-control" id="job-experience"
                                 placeholder="Enter experience">
+                            <div>
+                                @error('experience')
+                                    <div class="text-warning">{{ $message }}</div>
+                                @enderror
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="job-salary">Salary</label>
                             <input name="salary" type="text" class="form-control" id="job-salary"
                                 placeholder="Enter salary">
+                            <div>
+                                @error('salary')
+                                    <div class="text-warning">{{ $message }}</div>
+                                @enderror
+                            </div>
                         </div>
 
                         <div class="form-group">
@@ -60,12 +95,22 @@
                                 <option value="Female">Female</option>
                                 <option value="Any">Any</option>
                             </select>
+                            <div>
+                                @error('gender')
+                                    <div class="text-warning">{{ $message }}</div>
+                                @enderror
+                            </div>
                         </div>
 
                         <div class="form-group">
                             <label for="application_deadline">Application Deadline</label>
                             <input name="application_deadline" type="date" class="form-control" id=""
                                 placeholder="">
+                            <div>
+                                @error('application_deadline')
+                                    <div class="text-warning">{{ $message }}</div>
+                                @enderror
+                            </div>
                         </div>
 
                         <div class="row form-group">
@@ -73,6 +118,11 @@
                                 <label class="text-black" for="">Job Description</label>
                                 <textarea name="job_des" id="" cols="30" rows="7" class="form-control"
                                     placeholder="Write Job Description..."></textarea>
+                            </div>
+                            <div>
+                                @error('job_des')
+                                    <div class="text-warning">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
 
@@ -82,6 +132,11 @@
                                 <textarea name="responsibilities" id="" cols="30" rows="7" class="form-control"
                                     placeholder="Write Responsibilities..."></textarea>
                             </div>
+                            <div>
+                                @error('responsibilities')
+                                    <div class="text-warning">{{ $message }}</div>
+                                @enderror
+                            </div>
                         </div>
 
                         <div class="row form-group">
@@ -89,6 +144,11 @@
                                 <label class="text-black" for="">Education & Experience</label>
                                 <textarea name="education_experience" id="" cols="30" rows="7" class="form-control"
                                     placeholder="Write Education & Experience..."></textarea>
+                            </div>
+                            <div>
+                                @error('education_experience')
+                                    <div class="text-warning">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
 
@@ -112,6 +172,11 @@
                                     <option value="{{ $category->id }}">{{ $category->name }}</option>
                                 @endforeach
                             </select>
+                            <div>
+                                @error('category_id')
+                                    <div class="text-warning">{{ $message }}</div>
+                                @enderror
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="job-image">Images</label>
