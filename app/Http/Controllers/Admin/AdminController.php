@@ -10,6 +10,7 @@ use App\Models\Job;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
@@ -198,5 +199,106 @@ class AdminController extends Controller
         Job::create($data);
 
         return redirect()->route('all.job')->with('success', 'Job created successfully.');
+    }
+    public function editJob($id)
+    {
+        $job = Job::findOrFail($id);
+        $categories = Category::all(); // Fetch all categories for the select dropdown
+        return view('admin.editjob', compact('job', 'categories'));
+    }
+    public function updateJob(Request $request, $id)
+    {
+        // Validate the fields
+        $request->validate([
+            'job_title' => 'required|string|max:255',
+            'region' => 'required|string|max:255',
+            'company_name' => 'required|string|max:255',
+            'job_type' => 'required',
+            'vacancy' => 'required',
+            'experience' => 'required',
+            'salary' => 'required',
+            'gender' => 'required',
+            'application_deadline' => 'required',
+            'job_des' => 'required',
+            'responsibilities' => 'required',
+            'education_experience' => 'required',
+            'other_benifits' => 'nullable',
+            'category_id' => 'required|exists:categories,id',
+            'image' => 'nullable|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+
+        ]);
+
+        // Using save() method and get id from route parametar
+
+        $job = Job::findOrFail($id);
+
+        // Handle image upload
+        if ($request->hasFile('image')) {
+            // Delete the old image if necessary
+            if ($job->image) {
+                Storage::delete('public/' . $job->image);
+            }
+            // Store the new image
+            $path = $request->file('image')->store('images', 'public');
+            $job->image = $path;
+        }
+
+        // Update other fields
+        $job->job_title = $request->job_title;
+        $job->region = $request->region;
+        $job->company_name = $request->company_name;
+        $job->job_type = $request->job_type;
+        $job->vacancy = $request->vacancy;
+        $job->experience = $request->experience;
+        $job->salary = $request->salary;
+        $job->gender = $request->gender;
+        $job->application_deadline = $request->application_deadline;
+        $job->job_des = $request->job_des;
+        $job->responsibilities = $request->responsibilities;
+        $job->education_experience = $request->education_experience;
+        $job->other_benifits = $request->other_benifits;
+        $job->category_id = $request->category_id;
+
+        $job->save();
+
+        // Using Update() method and get job_id from hidden input field
+
+        //   $job_id = $request->job_id;
+        // $job = Job::findOrFail($job_id);
+
+        // // Handle image upload
+        // if ($request->hasFile('image')) {
+        //     // Delete the old image if necessary
+        //     if ($job->image) {
+        //         Storage::delete('public/' . $job->image);
+        //     }
+        //     // Store the new image
+        //     $path = $request->file('image')->store('images', 'public');
+        //     $job['image'] = $path;
+        // }
+
+        // // Update other fields
+
+        // $job = [
+        //     'job_title' => $request->job_title,
+        //     'region' => $request->region,
+        //     'company_name' => $request->company_name,
+        //     'job_type' => $request->job_type,
+        //     'vacancy' => $request->vacancy,
+        //     'experience' => $request->experience,
+        //     'salary' => $request->salary,
+        //     'gender' => $request->gender,
+        //     'application_deadline' => $request->application_deadline,
+        //     'job_des' => $request->job_des,
+        //     'responsibilities' => $request->responsibilities,
+        //     'education_experience' => $request->education_experience,
+        //     'other_benifits' => $request->other_benifits,
+        //     'category_id' => $request->category_id,
+
+        // ];
+
+        // Job::findOrFail($job_id)->update($job);
+
+        return redirect()->route('all.job')->with('success', 'Job updated successfully!');
     }
 }

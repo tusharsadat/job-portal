@@ -80,6 +80,12 @@ Route::middleware('auth:admin')->group(function () {
         //Job route
         Route::get('/admin/all-job', 'allJob')->name('all.job');
         Route::get('/admin/create-job', 'createJob')->name('create.job');
+        //Use POST for creating new records.
         Route::post('/admin/store-job', 'storeJob')->name('store.job');
+        Route::get('/admin/edit-job/{id}', 'editJob')->name('edit.job');
+        //Route::post('/admin/update-job', 'updateJob')->name('update.job');
+
+        //Use PUT (or PATCH for partial updates) to update existing records.
+        Route::put('/admin/update-job/{id}', 'updateJob')->name('update.job');
     });
 });
