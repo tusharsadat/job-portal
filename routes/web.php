@@ -87,5 +87,6 @@ Route::middleware('auth:admin')->group(function () {
 
         //Use PUT (or PATCH for partial updates) to update existing records.
         Route::put('/admin/update-job/{id}', 'updateJob')->name('update.job');
+        Route::delete('/admin/delete-job/{id}', 'deleteJob')->name('delete.job');
     });
 });

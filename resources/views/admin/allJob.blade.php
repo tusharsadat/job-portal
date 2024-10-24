@@ -43,7 +43,15 @@
                                     <td>{{ $allJob->created_at->format('Y-m-d') }}</td>
                                     <td><a href="{{ route('edit.job', $allJob->id) }}"
                                             class="btn btn-warning text-white text-center ">Update </a></td>
-                                    <td><a href="#" class="btn btn-danger  text-center ">delete</a></td>
+                                    <td>
+                                        <form action="{{ route('delete.job', $allJob->id) }}" method="POST"
+                                            onsubmit="return confirm('Are you sure you want to delete this job?');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        </form>
+                                    </td>
+                                    {{-- <td><a href="#" class="btn btn-danger  text-center ">delete</a></td> --}}
                                 </tr>
                             @endforeach
                         </tbody>

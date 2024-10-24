@@ -301,4 +301,22 @@ class AdminController extends Controller
 
         return redirect()->route('all.job')->with('success', 'Job updated successfully!');
     }
+
+    public function deleteJob($id)
+    {
+        // Find the job by its ID
+        $job = Job::findOrFail($id);
+
+        // Check if the job has an associated image
+        if ($job->image) {
+            // Delete the image from storage
+            Storage::delete('public/' . $job->image);
+        }
+
+        // Delete the job from the database
+        $job->delete();
+
+        // Redirect back with a success message
+        return redirect()->route('all.job')->with('success', 'Job and associated image deleted successfully!');
+    }
 }
