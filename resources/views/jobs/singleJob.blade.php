@@ -176,7 +176,8 @@
                                     <ul class="list-unstyled mb-0">
                                         <li class="mb-1"><a
                                                 href="{{ route('single.category', ['id' => $categorie->id, 'name' => $categorie->name]) }}"
-                                                class="text-decoration-none">{{ $categorie->name }}</a></li>
+                                                class="text-decoration-none">{{ $categorie->name }}
+                                                ({{ $categorie->jobs_count }})</a></li>
                                     </ul>
                                 @endforeach
                             </div>

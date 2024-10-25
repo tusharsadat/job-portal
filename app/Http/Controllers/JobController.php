@@ -28,7 +28,7 @@ class JobController extends Controller
             ->count();
 
         // get all categories
-        $categories = Category::all();
+        $categories = Category::withCount('jobs')->get();
 
         if (isset(Auth::user()->id)) {
             // Verifying if user Saved the job
