@@ -111,6 +111,7 @@
                                     <form action="{{ route('apply.job') }}" method="post">
                                         @csrf
                                         <input name="cv" type="hidden" value="{{ Auth::user()->cv }}">
+                                        <input name="user_email" type="hidden" value="{{ Auth::user()->email }}">
                                         <input name="user_id" type="hidden" value="{{ Auth::user()->id }}">
                                         <input name="job_id" type="hidden" value="{{ $singleJob->id }}">
                                         <input name="image" type="hidden" value="{{ $singleJob->image }}">

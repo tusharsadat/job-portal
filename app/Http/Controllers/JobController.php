@@ -71,6 +71,7 @@ class JobController extends Controller
         } else {
             $applyjob = Application::create([
                 'cv' => $request->cv,
+                'user_email' => $request->user_email,
                 'job_id' => $request->job_id,
                 'user_id' => $request->user_id,
                 'job_title' => $request->job_title,
