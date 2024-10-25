@@ -91,5 +91,6 @@ Route::middleware('auth:admin')->group(function () {
 
         //Application route
         Route::get('/admin/all-application', 'allApplication')->name('all.application');
+        Route::delete('/admin/delete-application/{id}', 'deleteApplication')->name('delete.application');
     });
 });

@@ -40,7 +40,15 @@
                                             href="{{ route('single-job', $application->job_id) }}">view job</a></td>
                                     <td>{{ $application->job_title }}</td>
                                     <td>{{ $application->company_name }}</td>
-                                    <td><a href="#" class="btn btn-danger  text-center ">Delete</a></td>
+                                    <td>
+                                        <form action="{{ route('delete.application', $application->id) }}" method="POST"
+                                            onsubmit="return confirm('Are you sure you want to delete this job?');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        </form>
+                                    </td>
+
                                 </tr>
                             @endforeach
                         </tbody>

@@ -325,4 +325,11 @@ class AdminController extends Controller
         $allApplication = Application::paginate(10);
         return view('admin.allApplication', compact('allApplication'));
     }
+    //delete method
+    public function deleteApplication($id)
+    {
+        Application::findOrFail($id)->delete();
+
+        return redirect()->route('all.application')->with('success', 'Job Application delete successfully');
+    }
 }
