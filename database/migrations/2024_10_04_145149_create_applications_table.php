@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('job_title');
             $table->string('region');
             $table->string('company_name');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->string('job_type');
             $table->timestamps();
         });

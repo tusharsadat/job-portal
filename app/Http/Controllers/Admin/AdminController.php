@@ -319,4 +319,10 @@ class AdminController extends Controller
         // Redirect back with a success message
         return redirect()->route('all.job')->with('success', 'Job and associated image deleted successfully!');
     }
+    //Display all category
+    public function allApplication()
+    {
+        $allApplication = Application::paginate(10);
+        return view('admin.allApplication', compact('allApplication'));
+    }
 }
